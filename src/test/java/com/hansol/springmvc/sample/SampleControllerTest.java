@@ -23,6 +23,9 @@ public class SampleControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Autowired
+    PersonRepository personRepository;
+
     @Test
     public void hello() throws Exception {
         //Request Path(PathVariable)
@@ -30,9 +33,13 @@ public class SampleControllerTest {
 //                .andDo(print())
 //                .andExpect(content().string("hello hansol"));
 
+        Person person = new Person();
+        person.setName("hansol");
+        Person savedPerson = personRepository.save(person);
+
         //Request Param
         this.mockMvc.perform(get("/hello")
-                    .param("name", "hansol"))
+                    .param("id", savedPerson.getId().toString()))
                 .andDo(print())
                 .andExpect(content().string("hello hansol"));
     }
