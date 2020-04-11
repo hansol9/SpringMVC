@@ -29,12 +29,22 @@ public class SimpleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("hello"));
 
-        this.mockMvc.perform(put("/hello"))
+        this.mockMvc.perform(put("/hi"))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        this.mockMvc.perform(post("/hello"))
+        this.mockMvc.perform(post("/say"))
                 .andDo(print())
                 .andExpect(status().isMethodNotAllowed());//405
+    }
+
+    @Test
+    public void uriTest() throws Exception {
+//        this.mockMvc.perform(get("/hello1"))
+//          this.mockMvc.perform(get("/hello/123"))
+        this.mockMvc.perform(get("/hello/test/api"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string("hello"));
     }
 }
