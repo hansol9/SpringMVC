@@ -44,4 +44,9 @@ public class SampleController {
         return person;
     }
 
+    @GetMapping("/xmlMessage")
+    public Person xmlMessage(@RequestBody Person person) {
+        return person;
+    }
+
 }
