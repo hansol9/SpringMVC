@@ -22,8 +22,18 @@ public class SampleController {
     }
     */
 
+    //preHandler 1
+    //preHandler 2
+    //request processing
+    //postHandler 2
+    //postHandler 1
+    //view rendering
+    //afterCompletion 2
+    //afterCompletion 1
+
     @GetMapping("/hello")
     public String hello(@RequestParam("id") Person person) {
+
         return "hello " + person.getName();
     }
 
