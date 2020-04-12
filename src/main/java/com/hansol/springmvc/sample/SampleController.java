@@ -1,6 +1,10 @@
 package com.hansol.springmvc.sample;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+
+import java.awt.*;
 
 @RestController
 public class SampleController {
@@ -47,6 +51,44 @@ public class SampleController {
     @GetMapping("/xmlMessage")
     public Person xmlMessage(@RequestBody Person person) {
         return person;
+    }
+
+    @GetMapping("/events")
+    @ResponseBody
+    public String events() {
+        return "events";
+    }
+
+    @GetMapping("/events/{id}")
+    @ResponseBody
+    public String getEventsWithId(@PathVariable Long id) {
+        return "events" + id;
+    }
+
+    @PostMapping(
+            value = "/events",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public String createEvent() {
+        return "event";
+    }
+
+    @DeleteMapping("/events/{id}")
+    @ResponseBody
+    public String getDeleteEventsWithId(@PathVariable Long id) {
+        return "events" + id;
+    }
+
+    @PutMapping(
+            value = "/events/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public String getPutEventsWithID(@PathVariable Long id) {
+        return "events" + id;
     }
 
 }
