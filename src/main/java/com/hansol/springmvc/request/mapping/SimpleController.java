@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SimpleController {
 
 //    @RequestMapping(value = "/hello", method = RequestMethod.GET)       // single method
-    @RequestMapping(value = {"/hello", "/hi", "/say"} , method = { RequestMethod.GET, RequestMethod.PUT})
+//    @RequestMapping(value = {"/hello", "/hi", "/say"} , method = { RequestMethod.GET, RequestMethod.PUT})
+    @GetHelloMapping
     @ResponseBody
     public String hello() {
         return "hello";

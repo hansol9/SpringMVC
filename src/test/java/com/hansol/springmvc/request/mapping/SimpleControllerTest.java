@@ -47,4 +47,13 @@ public class SimpleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("hello"));
     }
+
+    @Test
+    public void customMappingTest() throws Exception {
+
+        this.mockMvc.perform(get("/hello"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string("hello"));
+    }
 }
