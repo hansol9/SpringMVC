@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 
-@RestController
+//@RestController
 public class SampleController {
 
     /*
@@ -53,6 +53,7 @@ public class SampleController {
         return person;
     }
 
+    /*
     @GetMapping("/events")
     @ResponseBody
     public String events() {
@@ -74,6 +75,8 @@ public class SampleController {
     public String createEvent() {
         return "event";
     }
+
+     */
 
     @DeleteMapping("/events/{id}")
     @ResponseBody
