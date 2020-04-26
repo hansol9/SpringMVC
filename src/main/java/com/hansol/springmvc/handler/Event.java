@@ -1,9 +1,19 @@
 package com.hansol.springmvc.handler;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class Event {
 
+    interface ValidateLimit {}
+    interface ValidateName {}
+
     private Long id;
+
+    @NotBlank(groups = ValidateName.class)
     private String name;
+
+    @Min(value = 0, groups = ValidateLimit.class)
     private Integer limit;
 
     public Long getId() {
