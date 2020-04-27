@@ -3,15 +3,12 @@ package com.hansol.springmvc.handler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @SessionAttributes("event")
@@ -44,14 +41,38 @@ public class SampleController {
     }
     */
 
-    @GetMapping("/events/form")
-//    public String eventForm(Model model, HttpSession httpSession) {
-    public String eventForm(Model model) {
-        Event event = new Event();
-        event.setLimit(50);
+    @GetMapping("/events/form/name")
+    public String eventFormName(Model model) {
+        model.addAttribute("event", new Event());
+        return "events/form-name";
+    }
+
+    @PostMapping("/events/form/name")
+    public String eventsFormNameSubmit(@Validated @ModelAttribute Event event,
+                              BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            return "/events/form-name";
+        }
+
+        return "redirect:/events/form/limit";
+    }
+
+    @GetMapping("/events/form/limit")
+    public String eventFormLimit(@ModelAttribute Event event, Model model) {
         model.addAttribute("event", event);
-//        httpSession.setAttribute("event", event);
-        return "events/form";
+        return "events/form-limit";
+    }
+
+    @PostMapping("/events/form/limit")
+    public String eventsFormLimitSubmit(@Validated @ModelAttribute Event event,
+                                       BindingResult bindingResult,
+                                       SessionStatus sessionStatus) {
+        if(bindingResult.hasErrors()) {
+            return "/events/form-limit";
+        }
+        sessionStatus.setComplete();
+        return "redirect:/events/list_page";
     }
 
     /**
@@ -88,7 +109,7 @@ public class SampleController {
     public String createEvent(@Validated @ModelAttribute Event event,
                            BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return "/events/form";
+            return "form-name";
         }
 
         /*
