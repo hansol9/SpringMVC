@@ -7,6 +7,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,7 +124,11 @@ public class SampleController {
     }
 
     @GetMapping("/events/list_page")
-    public String getEvent(Model model) {
+    public String getEvent(Model model, HttpSession session) {
+//    public String getEvent(Model model, @SessionAttribute LocalDateTime visitTime) {
+        LocalDateTime visitTime = (LocalDateTime) session.getAttribute("visitTime");
+        System.out.println("============================");
+        System.out.println(visitTime);
         Event event = new Event();
         event.setName("Spring");
         event.setLimit(10);

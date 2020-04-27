@@ -1,5 +1,6 @@
 package com.hansol.springmvc;
 
+import com.hansol.springmvc.handler.VisitTimeInterceptor;
 import com.hansol.springmvc.interceptor.AnotherInterceptor;
 import com.hansol.springmvc.interceptor.GreetingInterceptor;
 import com.hansol.springmvc.sample.Person;
@@ -39,6 +40,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new AnotherInterceptor())
                 .addPathPatterns("/hello2")
                 .order(-1);
+        registry.addInterceptor(new VisitTimeInterceptor());
     }
 
     @Override
