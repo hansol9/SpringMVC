@@ -7,12 +7,14 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@SessionAttributes("event")
 public class SampleController {
 
     /*
@@ -43,10 +45,12 @@ public class SampleController {
     */
 
     @GetMapping("/events/form")
+//    public String eventForm(Model model, HttpSession httpSession) {
     public String eventForm(Model model) {
         Event event = new Event();
         event.setLimit(50);
         model.addAttribute("event", event);
+//        httpSession.setAttribute("event", event);
         return "events/form";
     }
 
