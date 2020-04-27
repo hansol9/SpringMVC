@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -60,13 +64,16 @@ public class SampleControllerTest {
 
     @Test
     public void postEvent() throws Exception {
-        mockMvc.perform(post("/events")
+        ResultActions result = mockMvc.perform(post("/events")
                 .param("name", "hansol9")
                 .param("limit", "-10"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("hansol9"))
-        ;
+                .andExpect(model().hasErrors());
+//                .andExpect(jsonPath("name").value("hansol9"))
+        ModelAndView modelAndView = result.andReturn().getModelAndView();
+        Map<String, Object> model = modelAndView.getModel();
+        System.out.println(model.size());
     }
 
 }
