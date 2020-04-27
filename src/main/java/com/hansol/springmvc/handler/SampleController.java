@@ -77,8 +77,11 @@ public class SampleController {
         }
 
         sessionStatus.setComplete();
-        attributes.addAttribute("name", event.getName());
-        attributes.addAttribute("limit", event.getLimit());
+        //RedirectAttributes
+//        attributes.addAttribute("name", event.getName());
+//        attributes.addAttribute("limit", event.getLimit());
+
+        attributes.addFlashAttribute("newEvent", event);
         return "redirect:/events/list_page";
     }
 
@@ -145,13 +148,17 @@ public class SampleController {
         newEvent.setLimit(limit);
         */
 
+        Event newEvent = (Event) model.asMap().get("newEvent");
+
         Event spring = new Event();
         spring.setName("spring");
         spring.setLimit(10);
 
         List<Event> eventList = new ArrayList<>();
         eventList.add(spring);
-        eventList.add(event);
+//        eventList.add(event);
+        eventList.add(newEvent);
+
         model.addAttribute("eventList", eventList);
 
         return "/events/list_page";
