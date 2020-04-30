@@ -80,6 +80,13 @@
             <artifactId>spring-oxm</artifactId>
             <version>${spring-framework.version}</version>
         </dependency>
+        <!-- get media type-->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>1.24</version>
+        </dependency>
+
     </dependencies>
 
     <build>
